@@ -1,0 +1,41 @@
+{
+  "name": "Java & Spring Boot 17 (Maven) - Tests",
+  "build": {
+    "dockerfile": "Dockerfile"
+    // Если вам нужно передать аргументы в Dockerfile, вы можете добавить их здесь.
+    // Например, если ваш Dockerfile принимает аргумент JAVA_VERSION:
+    // "args": {
+    //   "JAVA_VERSION": "17"
+    // }
+  },
+  // Вы можете использовать Docker Compose файл для определения ваших сервисов.
+  // "dockerComposeFile": "docker-compose.yml",
+  // "service": "app", // Сервис в docker-compose.yml, который представляет ваше приложение
+  // "workspaceFolder": "/workspace", // Или путь, по которому ваш код будет смонтирован в сервисе
+  "settings": {
+    "java.home": "/usr/lib/jvm/msopenjdk-17", // Путь к JDK 17 внутри контейнера
+    "java.configuration.updateBuildConfiguration": "automatic",
+    // Специфичные настройки для Spring Boot Tools
+    "spring-boot.ls.java.home": "/usr/lib/jvm/msopenjdk-17"
+  },
+  "extensions": [
+    "vscjava.vscode-java-pack", // Включает поддержку языка Java(TM) от Red Hat, отладчик для Java, средство запуска тестов для Java, Maven для Java, менеджер проектов для Java
+    "pivotal.vscode-spring-boot",
+    "vmware.vscode-spring-boot-dashboard",
+    "vscjava.vscode-lombok", 
+    "redhat.java",
+    "vscjava.vscode-maven"
+  ],
+  "forwardPorts": [
+    "8081:8080" // Пробрасываем порт 8080 контейнера на 8081 хоста
+    // Добавьте другие порты, если ваше приложение или сервисы их используют
+    // например, 5005 для удаленной отладки, если настроено
+  ],
+  // "postCreateCommand": "mvn clean install -DskipTests", // Пример: сборка проекта после создания контейнера
+  "postCreateCommand": "echo \'Dev container successfully created. Java version:\' && java -version && echo \'Maven version:\' && mvn -v",
+  "remoteUser": "vscode" // Предполагается, что в базовом образе есть пользователь \'vscode\' или вы создаете его в своем Dockerfile
+  // "mounts": [ // Пример монтирования локального сокета Docker, если это необходимо для Testcontainers или аналогичного
+  //  "source=/var/run/docker.sock,target=/var/run/docker.sock,type=bind"
+  // ],
+  // "runArgs": ["--cap-add=SYS_PTRACE", "--security-opt", "seccomp=unconfined"] // Для определенных сценариев отладки
+} 
