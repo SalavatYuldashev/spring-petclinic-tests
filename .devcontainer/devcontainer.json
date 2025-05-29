@@ -13,10 +13,10 @@
   // "service": "app", // Сервис в docker-compose.yml, который представляет ваше приложение
   // "workspaceFolder": "/workspace", // Или путь, по которому ваш код будет смонтирован в сервисе
   "settings": {
-    "java.home": "/usr/lib/jvm/msopenjdk-17", // Путь к JDK 17 внутри контейнера
+    "java.home": "/usr/lib/jvm/msopenjdk-current", // Путь к JDK 17 внутри контейнера
     "java.configuration.updateBuildConfiguration": "automatic",
     // Специфичные настройки для Spring Boot Tools
-    "spring-boot.ls.java.home": "/usr/lib/jvm/msopenjdk-17"
+    "spring-boot.ls.java.home": "/usr/lib/jvm/msopenjdk-current"
   },
   "extensions": [
     "vscjava.vscode-java-pack", // Включает поддержку языка Java(TM) от Red Hat, отладчик для Java, средство запуска тестов для Java, Maven для Java, менеджер проектов для Java

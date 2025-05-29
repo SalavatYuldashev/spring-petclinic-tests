@@ -4,15 +4,16 @@ import com.codeborne.selenide.SelenideElement;
 import io.qameta.allure.Step;
 
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selectors.byXpath;
 // import static com.codeborne.selenide.Selenide.page; // Если будем использовать Selenide Page Factory
 
 public class HomePage {
 
     // ==== Locators ====
-    // Примеры локаторов (нужно будет уточнить по реальной странице)
-    private final SelenideElement findOwnersLink = $("a[href='/owners/find']"); // Пример
-    private final SelenideElement veterinariansLink = $("//a[normalize-space()='Veterinarians']"); // Пример XPath
-    private final SelenideElement welcomeImage = $("img[src*='pets.png']"); // Пример
+    private final SelenideElement welcomeImage = $("img[src='resources/images/pets.png']");
+    private final SelenideElement findOwnersLink = $(byXpath("//a[normalize-space()='FIND OWNERS']"));
+    private final SelenideElement veterinariansLink = $(byXpath("//a[normalize-space()='VETERINARIANS']"));
+    // private final SelenideElement errorLink = $(byXpath("//a[normalize-space()='ERROR']")); // Если понадобится
 
     // ==== Actions ====
 
@@ -34,6 +35,14 @@ public class HomePage {
     public boolean isWelcomeImageDisplayed() {
         return welcomeImage.isDisplayed();
     }
+
+    // Можно добавить метод для клика по ссылке Error, если будем тестировать страницу ошибки с главной
+    /*
+    @Step("Нажать на ссылку 'Error' для проверки страницы ошибки")
+    public void clickErrorLink() {
+        errorLink.click();
+    }
+    */
 
     // Добавьте другие методы для взаимодействия с элементами главной страницы
 } 

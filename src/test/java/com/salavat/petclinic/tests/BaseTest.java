@@ -22,9 +22,10 @@ public class BaseTest {
     public void setUp() {
         // Configuration.browser = "firefox"; // Пример: если хотим использовать Firefox
         // Configuration.browserSize = "1920x1080";
-        // Configuration.headless = true; // Пример: для запуска тестов в headless режиме
-        Configuration.baseUrl = "http://localhost:8080"; // Укажите URL вашего приложения Petclinic
+        Configuration.headless = true; // Запускаем тесты в headless режиме
+        Configuration.baseUrl = "http://host.docker.internal:8080"; // Укажите URL вашего приложения Petclinic
         // Configuration.reportsFolder = "target/selenide-reports"; // Папка для отчетов Selenide (если нужно)
+        Configuration.browserCapabilities = new org.openqa.selenium.chrome.ChromeOptions().addArguments("--no-sandbox", "--disable-dev-shm-usage", "--remote-allow-origins=*");
         // Открываем главную страницу перед каждым тестом
         // Selenide.open("/"); // Это лучше делать в конкретных тестах или PageObject-ах
     }

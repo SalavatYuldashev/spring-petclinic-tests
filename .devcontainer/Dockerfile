@@ -10,6 +10,15 @@ USER root
 RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
     && apt-get -y install --no-install-recommends maven
 
+# Установка Google Chrome и его зависимостей
+RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
+    && apt-get -y install --no-install-recommends wget gnupg ca-certificates \
+    && wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | apt-key add - \
+    && sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list' \
+    && apt-get update \
+    && apt-get -y install --no-install-recommends google-chrome-stable \
+    && rm -rf /var/lib/apt/lists/*
+
 # Возвращаемся к пользователю vscode
 USER vscode
 
