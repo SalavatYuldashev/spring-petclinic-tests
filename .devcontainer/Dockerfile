@@ -3,12 +3,8 @@
 FROM mcr.microsoft.com/devcontainers/java:0-17-bullseye
 
 # Пользователь 'vscode' создается в базовом образе и имеет доступ sudo NOPASSWD.
-# Мы установим Maven.
-USER root
-
-# Установка Maven
-RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
-    && apt-get -y install --no-install-recommends maven
+# Maven теперь будет устанавливаться через "features" в devcontainer.json,
+# поэтому команда "apt-get install maven" здесь больше не нужна.
 
 # Установка Google Chrome и его зависимостей
 RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
@@ -42,7 +38,7 @@ WORKDIR /workspace
 # COPY pom.xml .
 # RUN mvn dependency:go-offline -B
 
-# Очищаем списки apt-get
-USER root
-RUN rm -rf /var/lib/apt/lists/*
-USER vscode 
+# Нет необходимости в очистке apt-get lists здесь, если мы не выполняем apt-get команд от пользователя vscode
+# USER root
+# RUN rm -rf /var/lib/apt/lists/*
+# USER vscode 

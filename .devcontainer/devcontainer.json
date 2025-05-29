@@ -13,10 +13,11 @@
   // "service": "app", // Сервис в docker-compose.yml, который представляет ваше приложение
   // "workspaceFolder": "/workspace", // Или путь, по которому ваш код будет смонтирован в сервисе
   "settings": {
-    "java.home": "/usr/lib/jvm/msopenjdk-current", // Путь к JDK 17 внутри контейнера
+    // Путь к Java, установленной через SDKMAN с помощью Java feature
+    "java.home": "/usr/local/sdkman/candidates/java/current",
     "java.configuration.updateBuildConfiguration": "automatic",
     // Специфичные настройки для Spring Boot Tools
-    "spring-boot.ls.java.home": "/usr/lib/jvm/msopenjdk-current"
+    "spring-boot.ls.java.home": "/usr/local/sdkman/candidates/java/current"
   },
   "extensions": [
     "vscjava.vscode-java-pack", // Включает поддержку языка Java(TM) от Red Hat, отладчик для Java, средство запуска тестов для Java, Maven для Java, менеджер проектов для Java
@@ -32,10 +33,26 @@
     // например, 5005 для удаленной отладки, если настроено
   ],
   // "postCreateCommand": "mvn clean install -DskipTests", // Пример: сборка проекта после создания контейнера
-  "postCreateCommand": "echo 'Dev container successfully created. Java version:' && java -version && echo 'Maven version:' && mvn -v",
-  "remoteUser": "vscode" // Предполагается, что в базовом образе есть пользователь \'vscode\' или вы создаете его в своем Dockerfile
+  "postCreateCommand": "echo 'alias ll=\"ls -alF\"' >> ~/.bashrc && java -version && mvn -v && echo 'Container setup complete.'",
+  "remoteUser": "vscode", // Предполагается, что в базовом образе есть пользователь \'vscode\' или вы создаете его в своем Dockerfile
   // "mounts": [ // Пример монтирования локального сокета Docker, если это необходимо для Testcontainers или аналогичного
   //  "source=/var/run/docker.sock,target=/var/run/docker.sock,type=bind"
   // ],
   // "runArgs": ["--cap-add=SYS_PTRACE", "--security-opt", "seccomp=unconfined"] // Для определенных сценариев отладки
+  "features": {
+    "ghcr.io/devcontainers/features/java:1": {
+      "version": "os-provided", // Используем Java из базового образа, если возможно, или устанавливаем через SDKMAN
+      "jdkVersion": "17",       // Указываем, что нам нужна Java 17
+      "installMaven": "true",
+      "mavenVersion": "3.9.8", // Можно указать конкретную версию Maven
+      "installGradle": "false"
+    },
+    // Docker-in-Docker feature, если нужен для Testcontainers или подобных сценариев
+    "ghcr.io/devcontainers/features/docker-in-docker:2": {
+        // "version": "latest",
+        // "moby": true // Использовать Moby (open source Docker) вместо Docker CE
+    },
+    // Chrome feature
+    "ghcr.io/devcontainers/features/chrome:1": {} // Add Google Chrome
+  }
 } 
