@@ -32,7 +32,7 @@
     // например, 5005 для удаленной отладки, если настроено
   ],
   // "postCreateCommand": "mvn clean install -DskipTests", // Пример: сборка проекта после создания контейнера
-  "postCreateCommand": "echo \'Dev container successfully created. Java version:\' && java -version && echo \'Maven version:\' && mvn -v",
+  "postCreateCommand": "echo 'Dev container successfully created. Java version:' && java -version && echo 'Maven version:' && mvn -v",
   "remoteUser": "vscode" // Предполагается, что в базовом образе есть пользователь \'vscode\' или вы создаете его в своем Dockerfile
   // "mounts": [ // Пример монтирования локального сокета Docker, если это необходимо для Testcontainers или аналогичного
   //  "source=/var/run/docker.sock,target=/var/run/docker.sock,type=bind"

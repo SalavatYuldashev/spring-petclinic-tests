@@ -23,22 +23,36 @@
 
 ```bash
 spring-petclinic-tests/
-├── README.md                # Главная документация проекта
-├── pom.xml                  # Maven зависимости и плагины
-├── docker-compose.yml       # Запуск окружения (petclinic + БД)
-├── .github/workflows/       # CI-конфигурация GitHub Actions
+├── README.md                # Главная документация проекта (этот файл)
+├── pom.xml                  # Файл конфигурации Maven (зависимости, плагины)
+├── .devcontainer/           # Конфигурация для Dev Container (Dockerfile, devcontainer.json)
+├── .github/workflows/       # CI-конфигурация GitHub Actions (планируется)
 ├── src/
 │   └── test/
 │       ├── java/
-│       │   ├── unit/         # Юнит-тесты (TestNG + Mockito)
-│       │   ├── api/          # API-тесты (RestAssured)
-│       │   ├── integration/  # Интеграционные тесты (Testcontainers)
-│       │   ├── ui/           # UI-тесты (Selenide)
-│       │   └── bdd/          # Step Definition классы (Cucumber)
+│       │   └── com/salavat/petclinic/ # Корневой пакет для Java-кода тестов
+│       │       ├── pages/             # Классы Page Objects (например, HomePage.java)
+│       │       └── tests/             # Классы с тестами (например, HomePageTests.java, BaseTest.java)
+│       │   # --- Директории ниже планируются для расширения покрытия различными типами тестов ---
+│       │   # ├── unit/                # Юнит-тесты (например, для вспомогательных классов или утилит)
+│       │   # ├── api/                 # API-тесты (RestAssured или аналоги)
+│       │   # ├── integration/         # Интеграционные тесты (например, с Testcontainers)
+│       │   # └── bdd/                 # Тесты на основе BDD (Cucumber)
 │       └── resources/
-│           └── features/     # .feature-файлы для BDD
-└── docs/
-    ├── test-strategy.md     # Пирамида тестирования и общая стратегия
-    ├── test-cases.md        # Описание тест-кейсов
-    ├── checklist.md         # Чек-листы для ручного тестирования
-    └── bug-report-template.md # Шаблон баг-репортов
+│           # └── features/            # .feature-файлы для BDD (планируется)
+│           └── allure.properties    # (Может быть добавлен для конфигурации Allure)
+├── testing_documentation/     # ВСЯ тестовая документация по проекту Petclinic
+│   ├── README.md              # Обзор и оглавление тестовой документации
+│   ├── test_plan.md           # Детальный план тестирования
+│   ├── test_strategy.md       # Общая стратегия тестирования
+│   ├── setup_guide.md         # Руководство по настройке и запуску тестов
+│   ├── exploratory_testing_notes.md # Шаблон и место для заметок по исследовательскому тестированию
+│   ├── bug_report_template.md # Шаблон для оформления баг-репортов
+│   ├── test_cases/            # Тест-кейсы
+│   │   ├── index.md           # Описание структуры и форматов тест-кейсов
+│   │   ├── ui/                # Тест-кейсы для UI (.md файлы или ссылки)
+│   │   └── api/               # Тест-кейсы для API (.md файлы или ссылки, планируется)
+│   ├── manual_checklists/     # Чек-листы для ручного тестирования
+│   │   └── general_checklist.md # Общий чек-лист по функционалу
+│   └── reports/               # Директория для отчетов Allure (обычно генерируется в target/allure-results)
+└── target/                    # Директория для скомпилированных файлов и отчетов Maven

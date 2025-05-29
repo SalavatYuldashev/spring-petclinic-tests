@@ -3,15 +3,15 @@
 ## 1. Необходимые условия (Prerequisites)
 
 - Установленная Java JDK (версия 17 или выше).
-- Установленный Maven или Gradle (в зависимости от выбора).
+- Установленный Maven.
 - Установленный веб-браузер (Chrome, Firefox) для UI тестов.
 - (Опционально) Установленный Docker, если тесты или приложение будут запускаться в контейнерах.
 
 ## 2. Клонирование репозитория
 
 ```bash
-git clone https://github.com/SalavatYuldashev/spring-petclinic.git
-cd spring-petclinic
+git clone https://github.com/SalavatYuldashev/spring-petclinic-tests
+cd spring-petclinic-tests
 ```
 
 ## 3. Настройка проекта
@@ -20,14 +20,10 @@ cd spring-petclinic
   ```bash
   ./mvnw clean install
   ```
-- Если используется Gradle:
-  ```bash
-  ./gradlew clean build
-  ```
 
 ## 4. Конфигурация тестового окружения
 
-- (Детали будут добавлены по мере разработки тестов, например, пути к веб-драйверам, URL приложения и т.д.)
+- (Детали будут добавлены по мере разработки тестов)
 
 ## 5. Запуск тестов
 
@@ -35,10 +31,7 @@ cd spring-petclinic
   ```bash
   ./mvnw test
   ```
-- Если используется Gradle и JUnit 5:
-  ```bash
-  ./gradlew test
-  ```
+
 - Для запуска отдельных тестов или групп тестов (команды будут уточнены).
 
 ## 6. Просмотр отчетов о тестировании
