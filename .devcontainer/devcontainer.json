@@ -1,58 +1,43 @@
 {
-  "name": "Java & Spring Boot 17 (Maven) - Tests",
+  "name": "PetClinic Tests (Java 17, Maven, Chrome)",
   "build": {
     "dockerfile": "Dockerfile"
-    // Если вам нужно передать аргументы в Dockerfile, вы можете добавить их здесь.
-    // Например, если ваш Dockerfile принимает аргумент JAVA_VERSION:
-    // "args": {
-    //   "JAVA_VERSION": "17"
-    // }
   },
-  // Вы можете использовать Docker Compose файл для определения ваших сервисов.
-  // "dockerComposeFile": "docker-compose.yml",
-  // "service": "app", // Сервис в docker-compose.yml, который представляет ваше приложение
-  // "workspaceFolder": "/workspace", // Или путь, по которому ваш код будет смонтирован в сервисе
-  "settings": {
-    // Путь к Java, установленной через SDKMAN с помощью Java feature
-    "java.home": "/usr/local/sdkman/candidates/java/current",
-    "java.configuration.updateBuildConfiguration": "automatic",
-    // Специфичные настройки для Spring Boot Tools
-    "spring-boot.ls.java.home": "/usr/local/sdkman/candidates/java/current"
-  },
-  "extensions": [
-    "vscjava.vscode-java-pack", // Включает поддержку языка Java(TM) от Red Hat, отладчик для Java, средство запуска тестов для Java, Maven для Java, менеджер проектов для Java
-    "pivotal.vscode-spring-boot",
-    "vmware.vscode-spring-boot-dashboard",
-    "vscjava.vscode-lombok", 
-    "redhat.java",
-    "vscjava.vscode-maven"
-  ],
-  "forwardPorts": [
-    "8081:8080" // Пробрасываем порт 8080 контейнера на 8081 хоста
-    // Добавьте другие порты, если ваше приложение или сервисы их используют
-    // например, 5005 для удаленной отладки, если настроено
-  ],
-  // "postCreateCommand": "mvn clean install -DskipTests", // Пример: сборка проекта после создания контейнера
-  "postCreateCommand": "echo 'alias ll=\"ls -alF\"' >> ~/.bashrc && java -version && mvn -v && echo 'Container setup complete.'",
-  "remoteUser": "vscode", // Предполагается, что в базовом образе есть пользователь \'vscode\' или вы создаете его в своем Dockerfile
-  // "mounts": [ // Пример монтирования локального сокета Docker, если это необходимо для Testcontainers или аналогичного
-  //  "source=/var/run/docker.sock,target=/var/run/docker.sock,type=bind"
-  // ],
-  // "runArgs": ["--cap-add=SYS_PTRACE", "--security-opt", "seccomp=unconfined"] // Для определенных сценариев отладки
   "features": {
     "ghcr.io/devcontainers/features/java:1": {
-      "version": "os-provided", // Используем Java из базового образа, если возможно, или устанавливаем через SDKMAN
-      "jdkVersion": "17",       // Указываем, что нам нужна Java 17
+      "version": "17",
+      "jdkDistro": "temurin",
       "installMaven": "true",
-      "mavenVersion": "3.9.8", // Можно указать конкретную версию Maven
-      "installGradle": "false"
+      "mavenVersion": "3.9.8"
     },
-    // Docker-in-Docker feature, если нужен для Testcontainers или подобных сценариев
     "ghcr.io/devcontainers/features/docker-in-docker:2": {
-        // "version": "latest",
-        // "moby": true // Использовать Moby (open source Docker) вместо Docker CE
+      "version": "latest",
+      "moby": true
     },
-    // Chrome feature
-    "ghcr.io/devcontainers/features/chrome:1": {} // Add Google Chrome
-  }
-} 
+    "ghcr.io/devcontainers/features/chrome:1": {
+      "version": "latest"
+    }
+  },
+  "settings": {
+    "java.configuration.updateBuildConfiguration": "automatic"
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "vscjava.vscode-java-pack",
+        "pivotal.vscode-spring-boot",
+        "vmware.vscode-spring-boot-dashboard",
+        "vscjava.vscode-lombok",
+        "redhat.java",
+        "vscjava.vscode-maven",
+        "redhat.vscode-xml",
+        "visualstudioexptteam.vscodeintellicode"
+      ]
+    }
+  },
+  "forwardPorts": [
+    8081
+  ],
+  "postCreateCommand": "chmod +x .devcontainer/setup.sh && .devcontainer/setup.sh",
+  "remoteUser": "vscode"
+}
