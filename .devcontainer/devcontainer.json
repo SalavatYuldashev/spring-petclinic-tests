@@ -5,7 +5,7 @@
   },
   "features": {
     "ghcr.io/devcontainers/features/java:1": {
-      "version": "17",
+      "version": "17.0.11-tem",
       "jdkDistro": "temurin",
       "installMaven": "true",
       "mavenVersion": "3.9.8"
@@ -15,11 +15,11 @@
       "moby": true
     }
   },
-  "settings": {
-    "java.configuration.updateBuildConfiguration": "automatic"
-  },
   "customizations": {
     "vscode": {
+      "settings": {
+        "java.configuration.updateBuildConfiguration": "automatic"
+      },
       "extensions": [
         "vscjava.vscode-java-pack",
         "pivotal.vscode-spring-boot",
